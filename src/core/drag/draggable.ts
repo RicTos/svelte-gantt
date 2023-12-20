@@ -17,8 +17,8 @@ export interface DraggableSettings {
     resizeAllowed: (() => boolean) | boolean;
     container: HTMLElement;
     resizeHandleWidth?: number;
-    getX?: (event?: MouseEvent) => number;
-    getY?: (event?: MouseEvent) => number;
+    getX?: () => number;
+    getY?: () => number;
     getWidth?: () => number;
     modelId?: number;
 }

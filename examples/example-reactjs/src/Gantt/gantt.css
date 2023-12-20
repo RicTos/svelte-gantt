@@ -1,0 +1,34 @@
+#example-gantt {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.container {
+    display: flex;
+    overflow: auto;
+    flex: 1;
+}
+
+#new-task {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    background-color: #ee6e73;
+    color: white;
+    padding: 1rem;
+    margin: 0.5rem;
+    cursor: grab;
+}
+
+.sg-external-indicator {
+    position: absolute;
+    background: #eee;
+    padding: 0.5em 1em;
+    font-size: 12px;
+    pointer-events: none;
+    background-color: rgb(116, 191, 255);
+    color: white;
+    font-family: 'Lato', sans-serif;
+    z-index: 10;
+}

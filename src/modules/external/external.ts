@@ -47,8 +47,8 @@ export class SvelteGanttExternal {
             resizeAllowed: false,
             onDrop: this.onDrop.bind(this),
             container: document.body,
-            getX: (event: MouseEvent) => event.pageX,
-            getY: (event: MouseEvent) => event.pageY,
+            getX: () => 0,
+            getY: () => 0,
             getWidth: () => 0
         });
     }

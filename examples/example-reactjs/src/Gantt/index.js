@@ -1,9 +1,10 @@
 
 
-import { MomentSvelteGanttDateAdapter, SvelteGantt, SvelteGanttDependencies, SvelteGanttTable } from 'svelte-gantt'
+import { MomentSvelteGanttDateAdapter, SvelteGantt, SvelteGanttDependencies, SvelteGanttTable, SvelteGanttExternal } from 'svelte-gantt'
 import moment from 'moment'
 import { useEffect, useState } from 'react';
 
+import "./gantt.css"
 
 const Tree = () => {
     // Loading
@@ -191,16 +192,43 @@ const Tree = () => {
     useEffect(() => {
         if (!loaded) {
             // Create Gantt
-            new SvelteGantt({ target: document.getElementById('example-gantt'), props: options })
+           const gantt = new SvelteGantt({ target: document.getElementById('example-gantt'), props: options })
+
+            new SvelteGanttExternal(
+                document.getElementById('new-task'),
+                {
+                  gantt,
+                  enabled: true,
+                  onsuccess: (row, date, gantt) => {
+                    console.log(row.model.id, new Date(date).toISOString())
+                    const id = 5000 + Math.floor(Math.random() * 1000);
+                    gantt.updateTask({
+                        id,
+                        label: `Task #${id}`,
+                        from: date,
+                        to: date + 3 * 60 * 60 * 1000,
+                        classes: "orange",
+                        resourceId: row.model.id
+                    });
+                },
+                elementContent: () => {
+                    const element = document.createElement('div');
+                    element.innerHTML = 'New Task';
+                    element.className = 'sg-external-indicator';
+                    return element;
+                }
+                }
+            )
+
             setLoaded(true)
         }
     }, [loaded])
 
     return (
-        <>
-            {/* GANTT CONTAINER */}
+        <div className="container">
             <div id="example-gantt"></div>
-        </>
+            <div id="new-task">Drag to gantt</div>
+        </div>
     )
 }
 
