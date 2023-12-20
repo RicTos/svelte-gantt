@@ -90,3 +90,6 @@ dist/
 
 # svelte
 /.svelte-kit
+
+# vscode config
+/.vscode
